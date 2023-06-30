@@ -1,3 +1,4 @@
+import { useState } from "react";
 const initialFriends = [
   {
     id: 118836,
@@ -19,13 +20,29 @@ const initialFriends = [
   },
 ]; // Array of friends information to be displayed
 
+function Button({ children, onClick }) {
+  return (
+    <button className="button" onClick={onClick}>
+      {children}
+    </button>
+  );
+}
+
 function App() {
+  const [showAddFriend, setShowAddFriend] = useState(false); // State to control the display of the form to add a friend
+
+  function handleShowAddFriend() {
+    setShowAddFriend(!showAddFriend);
+  } // Function to toggle the display of the form to add a friend
+
   return (
     <div className="app">
       <div className="sidebar">
         <FriendsList />
-        <FormAddFriend />
-        <Button>Add Friend</Button>
+        {showAddFriend && <FormAddFriend />}
+        <Button onClick={handleShowAddFriend}>
+          {showAddFriend ? "Close" : "Add friend"}
+        </Button>
       </div>
       <FormSlpitBill></FormSlpitBill>
     </div>
@@ -66,10 +83,6 @@ function Friend({ friend, key }) {
   );
   // Display the friend information in a list item and add a button to select the friend and display the transactions
   //abs is used to convert negative balance to positive
-}
-
-function Button({ children }) {
-  return <button className="button">{children}</button>;
 }
 
 function FormAddFriend() {
