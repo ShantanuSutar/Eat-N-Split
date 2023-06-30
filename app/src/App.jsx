@@ -24,7 +24,10 @@ function App() {
     <div className="app">
       <div className="sidebar">
         <FriendsList />
+        <FormAddFriend />
+        <Button>Add Friend</Button>
       </div>
+      <FormSlpitBill></FormSlpitBill>
     </div>
   );
 } // Main component
@@ -58,11 +61,52 @@ function Friend({ friend, key }) {
       )}
       {friend.balance === 0 && <p>You and {friend.name} are even</p>}
 
-      <button className="button">Select</button>
+      <Button>Select</Button>
     </li>
   );
   // Display the friend information in a list item and add a button to select the friend and display the transactions
   //abs is used to convert negative balance to positive
 }
+
+function Button({ children }) {
+  return <button className="button">{children}</button>;
+}
+
+function FormAddFriend() {
+  return (
+    <form className="form-add-friend">
+      <label>🧑Friend name</label>
+      <input type="text" />
+
+      <label>📸 Image URL</label>
+      <input type="text" />
+
+      <Button>Add</Button>
+    </form>
+  );
+} // Form to add a new friend to the list
+
+function FormSlpitBill() {
+  return (
+    <form className="form-split-bill">
+      <h2>Split a bill with x</h2>
+
+      <label>💰 Bill Value</label>
+      <input type="text" />
+
+      <label>🧑 Your expense</label>
+      <input type="text" />
+
+      <label>👨🏻‍🤝‍👨🏻 X's expense</label>
+      <input type="text" disabled />
+
+      <label>🤑 Who's paying the bill?</label>
+      <select>
+        <option value="user">You</option>
+        <option value="friend">X</option>
+      </select>
+    </form>
+  );
+} // Form to split a bill with a friend
 
 export default App;
